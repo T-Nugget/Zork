@@ -4,11 +4,11 @@ namespace Zork
 {
     class Program
     {
-        private static string Location
+        private static string CurrentRoom
         {
             get
             {
-                return Rooms[LocationColumn];
+                return Rooms[Location.Row, Location.Column];
             }
         }
         static void Main(string[] args)
@@ -17,7 +17,7 @@ namespace Zork
 
             while (true)
             {
-                Console.Write($"{Location}\n> ");
+                Console.Write($"{CurrentRoom}\n> ");
                 Commands command = ToCommand(Console.ReadLine().Trim());
                 if (command == Commands.QUIT)
                 {
@@ -57,21 +57,33 @@ namespace Zork
             switch (command)
             {
                 case Commands.NORTH:
+                    if (Location.Row > 0)
+                    {
+                        Location.Row--;
+                        didMove = true;
+                    }
+                    break;
+
                 case Commands.SOUTH:
+                    if (Location.Row < Rooms.GetLength(1) - 1)
+                    {
+                        Location.Row++;
+                        didMove = true;
+                    }
                     break;
 
                 case Commands.EAST:
-                    if (LocationColumn < Rooms.Length - 1)
+                    if (Location.Column < Rooms.GetLength(1) - 1)
                     {
-                        LocationColumn++;
+                        Location.Column++;
                         didMove = true;
                     }
                      break;
 
                 case Commands.WEST:
-                    if (LocationColumn > 0)
+                    if (Location.Column > 0)
                     {
-                        LocationColumn--;
+                        Location.Column--;
                         didMove = true;
                     }
                     break;
@@ -86,8 +98,17 @@ namespace Zork
             return Enum.TryParse<Commands>(commandString, true, out Commands command) ? command : Commands.UNKNOWN;
         }
 
-        private static string[] Rooms = { "Forest", "West of House", "Behind House", "Clearing", "Canyon View" };
-        private static int LocationColumn = 1;
-        
+        private static readonly string[,] Rooms = {
+
+            { "Dense Woods", "North of House", "Clearing" },
+            { "Forest", "West of House", "Behind House" },
+            { "Rocky Trail", "South of House", "Canyon View" },
+
+        };
+
+        private static (int Row, int Column) Location = (1, 1);
+
     }
+
+
 }
