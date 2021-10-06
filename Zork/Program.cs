@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using Newtonsoft.Json;
+
 
 
 
@@ -22,26 +23,19 @@ namespace Zork
             RoomsFilename = 0
         }
 
-        private static readonly Dictionary<string, Room> RoomMap;
-        static Program()
-        {
-            RoomMap = new Dictionary<string, Room>();
-            foreach (Room room in Rooms)
-            {
-                RoomMap[room.Name] = room;
-            }
-        }
+    
+
 
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Zork!");
 
 
-            const string defaultRoomsFilename = "Rooms.txt";
+            const string defaultRoomsFilename = "Rooms.json";
             string roomDescriptionsFilename = (args.Length > 0 ? args[(int)CommandLineArguments.RoomsFilename] : defaultRoomsFilename);
 
-            //const string roomDescriptionsFilename = "Rooms.txt";
-            InitializeRoomDescriptions(roomDescriptionsFilename);
+
+            InitializeRooms(roomDescriptionsFilename);
 
             Room previousRoom = null;
             Commands command = Commands.UNKNOWN;
@@ -132,33 +126,12 @@ namespace Zork
             Description
         }
 
-
-
-        private static void InitializeRoomDescriptions(string roomDescriptionsFilename)
+        private static void InitializeRooms(string roomDescriptionsFilename)
         {
-            const string fieldDelimiter = "##";
-            const int expectedFieldCount = 2;
-
-            var roomQuery = from line in File.ReadLines(roomDescriptionsFilename)            
-                            let fields = line.Split(fieldDelimiter)
-                            where fields.Length == expectedFieldCount
-                            select (Name: fields[(int)Fields.Name],
-                                    Description: fields[(int)Fields.Description]);
-            
-            foreach (var (Name, Description) in roomQuery)
-            {
-                RoomMap[Name].Description = Description;
-            }
-
+            Rooms = JsonConvert.DeserializeObject<Room[,]>(File.ReadAllText(roomDescriptionsFilename));
         }
 
-        private static readonly Room[,] Rooms = {
-
-            { new Room("Dense Woods"), new Room("North of House"), new Room("Clearing") },
-            { new Room("Forest"), new Room("West of House"), new Room("Behind House") },
-            { new Room("Rocky Trail"), new Room("South of House"), new Room("Canyon View") },
-
-        };
+        private static Room[,] Rooms;
 
         private static readonly List<Commands> Directions = new List<Commands>
         {

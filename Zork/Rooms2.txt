@@ -1,9 +1,0 @@
-﻿Rocky Trail##This is an alternate desciption for the rocky trail to test chosing a file with cli.
-South of House##This is an alternate desciption for south of house to test chosing a file with cli.
-Canyon View##This is an alternate desciption for the canyon view to test chosing a file with cli.
-Forest##This is an alternate desciption for the forest to test chosing a file with cli.
-West of House##This is an alternate desciption for west of house to test chosing a file with cli.
-Behind House##This is an alternate desciption for behind house to test chosing a file with cli.
-Dense Woods##This is an alternate desciption for the dense woods to test chosing a file with cli.
-North of House##This is an alternate desciption for north of house to test chosing a file with cli.
-Clearing##This is an alternate desciption for the clearing to test chosing a file with cli.
