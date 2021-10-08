@@ -18,7 +18,7 @@ namespace Zork
 
         private enum CommandLineArguments
         {
-            RoomDescriptionsFilename = 0
+            RoomsFilename = 0
         }
 
     }
