@@ -19,7 +19,7 @@ namespace Zork
             }
             set
             {
-                Location = World?.RoomsByName.GetValueOrDefault(value);
+                Location = World?.RoomsByName.GetValueOrDefaultKey(value);
             }
         }
 
@@ -31,6 +31,7 @@ namespace Zork
 
         public bool Move(Directions direction)
         {
+
             bool isValidMove = Location.Neighbors.TryGetValue(direction, out Room destination);
             if (isValidMove)
             {
