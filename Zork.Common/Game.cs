@@ -1,19 +1,21 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 using System;
+using System.Collections.Generic;
 
 
 namespace Zork
 {
     public class Game
     {
-        public World World { get; private set; }
+        public World World { get; set; }
 
         [JsonIgnore]
         public Player Player { get; set; }
 
         [JsonIgnore]
         private bool IsRunning { get; set; }
+        public IList<Room> Rooms { get; set; }
 
         public Game(World world, Player player)
         {
