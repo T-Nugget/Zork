@@ -1,10 +1,9 @@
-﻿{
+{
   "World": {
-    "StartingLocation": "West of House",
     "Rooms": [
       {
         "Name": "West of House",
-        "Description": "Pizza",
+        "Description": "This is an open field west of a white house, with a boarded front door.",
         "Neighbors": {
           "North": "North of House",
           "South": "South of House",
@@ -34,13 +33,12 @@
         "Neighbors": {
           "North": "North of House",
           "East": "Clearing",
-          "West": "South of House"
+          "South": "South of House"
         }
       },
       {
         "Name": "Forest 1",
-        "LookName": "Forest",
-        "Description": "This is a forest, with trees in all directions arround you.",
+        "Description": "This is a forest, with trees in all directions around you.",
         "Neighbors": {
           "South": "Forest 3",
           "East": "West of House"
@@ -71,5 +69,8 @@
         }
       }
     ]
-  }
+  },
+  "StartingLocation": "West of House",
+  "WelcomeMessage": "Welcome to Zork!",
+  "ExitMessage": "Thank you for playing!"
 }
